@@ -9,9 +9,11 @@
 `Read or watch:`
 
 [Promise](#promise)
-[JavaScript Promise: An introduction](#javascript-promise-:-an-introduction)
+
 [Await](#await)
+
 [Async](#async)
+
 [Throw / Try](#throw-/-try)
 
 ## Learning Objectives
