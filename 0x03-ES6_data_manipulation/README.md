@@ -4,7 +4,7 @@
 
 ## ES6
 
-![SCRIPT](https://s3.amazonaws.com/alx-intranet.hbtn.io/uploads/medias/2019/12/6ab7bec4727cb5c91257.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIARDDGGGOUSBVO6H7D%2F20240701%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240701T040614Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=8c70283a91d5db4e9c28b8fffd4c31c9e593a99f9eb19bfefed0ebc93a7e6a31)
+![SCRIPT](https://private-user-images.githubusercontent.com/125453474/294835104-e80f64bf-f162-4a5d-93c1-924122088ea4.jpg?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MTk4MTg1MjMsIm5iZiI6MTcxOTgxODIyMywicGF0aCI6Ii8xMjU0NTM0NzQvMjk0ODM1MTA0LWU4MGY2NGJmLWYxNjItNGE1ZC05M2MxLTkyNDEyMjA4OGVhNC5qcGc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjQwNzAxJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI0MDcwMVQwNzE3MDNaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT0zMzM5ZWVmNTBhYWE5ZjdhMGUzMTA5YzczOTZhOTA3OTU3Y2VkZTY0NjQwOTE0YjE0Y2NlMTFhYTljN2Y5NThiJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZhY3Rvcl9pZD0wJmtleV9pZD0wJnJlcG9faWQ9MCJ9.lAvXrwI754rx-Xs_kvatecBTxFN6n88pVGJKrb8IGc8)
 
 ## Resources
 
@@ -15,7 +15,7 @@
 - [Map Data Structure](#https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map)
 - [WeakMap](#https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap)
 
-## Learning Objectives
+## Learning Objectives📖
 
 At the end of this project, you are expected to be able to explain to anyone, without the help of Google:
 
@@ -55,4 +55,27 @@ At the end of this project, you are expected to be able to explain to anyone, wi
 
 ## Configuration files
 
-Add the following files to your project directory
+- Add the following files to your project directory
+
+``package.json``
+
+
+{
+  "scripts": {
+    "lint": "./node_modules/.bin/eslint",
+    "check-lint": "lint [0-9]*.js",
+    "dev": "npx babel-node",
+    "test": "jest",
+    "full-test": "./node_modules/.bin/eslint [0-9]*.js && jest"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.6.0",
+    "@babel/node": "^7.8.0",
+    "@babel/preset-env": "^7.6.0",
+    "eslint": "^6.4.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jest": "^22.17.0",
+    "jest": "^24.9.0"
+  }
+}
