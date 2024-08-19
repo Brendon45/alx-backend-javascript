@@ -369,4 +369,186 @@ __Repo__:
   - Directory: `0x05-Node_JS_basic`
   - File: `5-http.js`
 
-## 
+## 6. Create a small HTTP server using Express
+
+Install Express and in a file named `6-http_express.js`, create a small HTTP server using Express module:
+
+  - It should be assigned to the variable `app` and this one must be exported
+  - HTTP server should listen on port 1245
+  - Displays `Hello Holberton School!` in the page body for the endpoint /
+
+In terminal 1:
+
+    bob@dylan:~$ node 6-http_express.js
+    ...
+
+In terminal 2:
+
+    bob@dylan:~$ curl localhost:1245 && echo ""
+    Hello Holberton School!
+    bob@dylan:~$ 
+    bob@dylan:~$ curl localhost:1245/any_endpoint && echo ""
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+    <meta charset="utf-8">
+    <title>Error</title>
+    </head>
+    <body>
+    <pre>Cannot GET /lskdlskd</pre>
+    </body>
+    </html> 
+    bob@dylan:~$ 
+
+__Repo__:
+
+  - GitHub repository: alx-backend-javascript
+  - Directory: 0x05-Node_JS_basic
+  - File: 6-http_express.js
+
+## 7. Create a more complex HTTP server using Express
+
+In a file named 7-http_express.js, recreate the small HTTP server using Express:
+
+  - It should be assigned to the variable app and this one must be exported
+  - HTTP server should listen on port 1245
+  - It should return plain text
+  - When the URL path is /, it should display Hello Holberton School! in the page body
+  - When the URL path is /students, it should display This is the list of our students followed by the same content as the file 3-read_file_async.js (with and without the database) - the name of the database must be passed as argument of the file
+  - CSV file can contain empty lines (at the end) - and they are not a valid student!
+
+Terminal 1:
+
+    bob@dylan:~$ node 7-http_express.js database.csv
+    ...
+
+In terminal 2:
+
+    bob@dylan:~$ curl localhost:1245 && echo ""
+    Hello Holberton School!
+    bob@dylan:~$ 
+    bob@dylan:~$ curl localhost:1245/students && echo ""
+    This is the list of our students
+    Number of students: 10
+    Number of students in CS: 6. List: Johann, Arielle, Jonathan, Emmanuel, Guillaume, Katie
+    Number of students in SWE: 4. List: Guillaume, Joseph, Paul, Tommy
+    bob@dylan:~$
+
+__Repo__:
+
+  - GitHub repository: `alx-backend-javascript`
+  - Directory: `0x05-Node_JS_basic`
+  - File: `7-http_express.js`
+
+## 8. Organize a complex HTTP server using Express
+
+Obviously writing every part of a server within a single file is not sustainable. Let’s create a full server in a directory named `full_server`.
+
+Since you have used ES6 and Babel in the past projects, let’s use `babel-node` to allow to use ES6 functions like `import` or `export`.
+
+__8.1 Organize the structure of the server__
+
+Create 2 directories within:
+  - controllers
+  - routes
+- Create a file full_server/utils.js, in the file create a function named readDatabase that accepts a file path as argument:
+  - It should read the database asynchronously
+  - It should return a promise
+  - When the file is not accessible, it should reject the promise with the error
+  - When the file can be read, it should return an object of arrays of the firstname of students per fields
+
+__8.2 Write the App controller__
+
+Inside the file `full_server/controllers/AppController.js`:
+
+  - Create a class named `AppController`. Add a static method named `getHomepage`
+  - The method accepts `request` and `response`as argument. It returns a 200 status and the message `Hello Holberton School!`
+
+__8.3 Write the Students controller__
+
+Inside the file
+`full_server/controllers/StudentsController.js`, create a class named `StudentsController`. Add two static methods:
+
+The first one is getAllStudents:
+
+  - The method accepts request and response as argument
+  - It should return a status 200
+  - It calls the function readDatabase from the utils file, and display in the page:
+    - First line: This is the list of our students
+    - And for each field (order by alphabetic order case insensitive), a line that displays the number of students in the field, and the list of first names (ordered by appearance in the database file) with the following format: Number of students in FIELD: 6. List: LIST_OF_FIRSTNAMES
+- If the database is not available, it should return a status 500 and the error message `Cannot load the database`
+
+__8.4 Write the routes__
+
+Inside the file `full_server/routes/index.js`:
+
+  - Link the route `/` to the `AppController`
+  - Link the route `/students` and `/students/:major`to the `StudentsController`
+
+__8.5 Write the server reusing everything you created__
+
+Inside the file named `full_server/server.js`, create a small Express server:
+
+  - It should use the routes defined in `full_server/routes/index.js`
+  - It should use the port `1245`
+
+8.6 Update `package.json` (if you are running it from outside the folder `full_server`)
+
+If you are starting node from outside of the folder `full_server`, you will have to update the command `dev` by: `nodemon --exec babel-node --presets babel-preset-env ./full_server/server.js ./database.csv`
+
+__Warning__:
+
+  - Don’t forget to export your express app at the end of `server.js` (`export default app;`)
+  - The database filename is passed as argument of the `server.js` BUT, for testing purpose, you should retrieve this filename at the execution (when `getAllStudents` or `getAllStudentsByMajor` are called for example)
+
+In terminal 1:
+
+    bob@dylan:~$ npm run dev
+    ...
+
+In terminal 2:
+
+    bob@dylan:~$ curl localhost:1245 && echo ""
+    Hello Holberton School!
+    bob@dylan:~$ 
+    bob@dylan:~$ curl localhost:1245/students && echo ""
+    This is the list of our students
+    Number of students in CS: 6. List: Johann, Arielle, Jonathan, Emmanuel, Guillaume, Katie
+    Number of students in SWE: 4. List: Guillaume, Joseph, Paul, Tommy
+    bob@dylan:~$ 
+    bob@dylan:~$ curl localhost:1245/students/SWE && echo ""
+    List: Guillaume, Joseph, Paul, Tommy
+    bob@dylan:~$ 
+    bob@dylan:~$ curl localhost:1245/students/French -vvv && echo ""
+    *   Trying 127.0.0.1...
+    * TCP_NODELAY set
+    * Connected to localhost (127.0.0.1) port 1245 (#0)
+    > GET /students/SWES HTTP/1.1
+    > Host: localhost:1245
+    > User-Agent: curl/7.58.0
+    > Accept: */*
+    >
+    < HTTP/1.1 500 Internal Server Error
+    < X-Powered-By: Express
+    < Date: Mon, 06 Jul 2020 03:29:00 GMT
+    < Connection: keep-alive
+    < Content-Length: 33
+    <
+    * Connection #0 to host localhost left intact
+    Major parameter must be CS or SWE
+    bob@dylan:~$
+
+If you want to add test to validate your integration, you will need to add this file: `.babelrc`
+
+Click to show/hide file contents
+
+
+    {
+        "presets": [["env", {"exclude": ["transform-regenerator"]}]]
+    }
+
+__Repo__:
+
+  - GitHub repository: `alx-backend-javascript`
+  - Directory: `0x05-Node_JS_basic`
+  - File: `full_server/utils.js, full_server/controllers/AppController.js, full_server/controllers/StudentsController.js, full_server/routes/index.js, full_server/server.js`
