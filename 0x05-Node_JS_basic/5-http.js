@@ -1,3 +1,15 @@
+/*
+  This code sets up a basic HTTP server using Node.js that serves two routes:
+  - '/' : Responds with "Hello Holberton School!"
+  - '/students' : Responds with a list of students, including the total number,
+    and the number of students in "CS" and "SWE" fields, retrieved from an external file.
+
+  The server listens on the specified port and hostname, and it leverages the
+  'getStudentData' function to read and parse student data from a file asynchronously.
+
+  The server is also exported as a module for potential reuse or testing.
+*/
+
 const http = require('http');
 
 const getStudentData = require('./3-read_file_async');
