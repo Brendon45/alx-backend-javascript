@@ -1,3 +1,11 @@
+/* 
+   This module processes student data from a file.
+   It counts the total number of students and categorizes
+   them based on their field of study (CS or SWE).
+   The function is asynchronous and handles file reading 
+   using promises.
+*/
+
 const fs = require('fs');
 
 const countStudents = async (path) => {
