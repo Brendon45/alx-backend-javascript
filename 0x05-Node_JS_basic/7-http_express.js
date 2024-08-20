@@ -1,3 +1,16 @@
+/*
+  This code sets up a basic HTTP server using Express.js with two routes:
+  - The root route ('/') responds with "Hello Holberton School!".
+  - The '/students' route asynchronously reads student data from a file
+    and returns the number of students along with a list of students
+    in the CS and SWE fields.
+
+  The server listens on the specified port (1245) and logs a message when running.
+  The student data is fetched from a file passed as an argument to the script.
+
+  The server is also exported as a module for potential reuse or testing.
+*/
+
 const express = require('express');
 
 const PORT = 1245;
