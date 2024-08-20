@@ -1,3 +1,15 @@
+/*
+  This code sets up a basic HTTP server using Node.js.
+  The server listens on the specified port and hostname,
+  and responds with "Hello Holberton School!" to any incoming requests.
+
+  - PORT: The port number on which the server listens.
+  - HOST_NAME: The hostname or IP address the server binds to.
+  - The server responds with a status code of 200 (OK) and plain text content.
+
+  The server is also exported as a module for potential reuse or testing.
+*/
+
 const http = require('http');
 
 const PORT = 1245;
